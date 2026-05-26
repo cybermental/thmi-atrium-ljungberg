@@ -11,12 +11,12 @@
 	/>
 
 	<DataSource
-			jdbcUrl="jdbc:mariadb://mariadb:3306?createDatabaseIfNotExist=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;characterEncoding=utf8&amp;useSSL=false"
+			jdbcUrl="jdbc:mariadb://127.0.0.1:3306?createDatabaseIfNotExist=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;characterEncoding=utf8&amp;useSSL=false"
 			username="root"
 			password="scada"
 	/>
 	<HistoryDataSource
-			jdbcUrl="jdbc:mariadb://mariadb:3306?createDatabaseIfNotExist=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;characterEncoding=utf8&amp;useSSL=false"
+			jdbcUrl="jdbc:mariadb://127.0.0.1:3306?createDatabaseIfNotExist=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;characterEncoding=utf8&amp;useSSL=false"
 			username="root"
 			password="scada"
 	/>

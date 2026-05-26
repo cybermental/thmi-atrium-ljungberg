@@ -122,7 +122,7 @@ Run MariaDB, Clickhouse and RabbitMQ containers:
 docker-compose -f env.yml up -d
 ```
 
-MariaDB and clickhouse should have persistent volumes to prevent data loss on stack restart.
+MariaDB and Clickhouse should have persistent volumes to prevent data loss on stack restart.
 Compose file do not have any redundancy or backup mechanism
 
 Populate database
@@ -136,6 +136,11 @@ Start the THMI stack
 docker compose -f cloud.yml up -d
 ```
 ## THMI Edge
+
+THMI Edge is running as a Docker container. The image includes MariaDB.
+
+Edge should be able to connect to the same RabbitMQ as a Cloud stack.
+The config file for Edge can be found there: ./conf/edge/app_config.xml
 
 ```bash
 git clone <repo-url>

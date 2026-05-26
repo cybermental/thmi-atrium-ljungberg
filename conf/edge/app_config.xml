@@ -16,9 +16,9 @@
 			password="scada"
 	/>
 	<HistoryDataSource
-			jdbcUrl="ch:http://clickhouse:8123"
-			username=""
-			password=""
+			jdbcUrl="jdbc:mariadb://mariadb:3306?createDatabaseIfNotExist=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;characterEncoding=utf8&amp;useSSL=false"
+			username="root"
+			password="scada"
 	/>
 	<HistoryCleanup
 			enabled="true"

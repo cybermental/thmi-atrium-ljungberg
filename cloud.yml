@@ -1,6 +1,6 @@
 services:
   engine:
-    image: engine
+    image: ghcr.io/cybermental/thmi/engine:2026.1.2-1799
     container_name: engine
     ports:
       - '9901:8080' # HTTP API
@@ -9,12 +9,12 @@ services:
     volumes:
       - ./.logs/engine:/var/log/app
       - ./.logs/engine/tomcat:/usr/local/tomcat/logs
-      - ./../engine:/etc/app
+      - ./conf/engine:/etc/app
     networks:
       - dev
 
   history:
-    image: history
+    image: ghcr.io/cybermental/thmi/history:2026.1.2-1799
     container_name: history
     ports:
       - '9902:8080' # HTTP API
@@ -23,7 +23,7 @@ services:
     volumes:
       - ./.logs/history:/var/log/app
       - ./.logs/history/tomcat:/usr/local/tomcat/logs
-      - ./../history:/etc/app
+      - ./conf/history:/etc/app
     networks:
       - dev
     depends_on:
@@ -32,21 +32,21 @@ services:
   hmi:
     environment:
       - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT} -Djavax.xml.accessExternalDTD=all
-    image: hmi
+    image: ghcr.io/cybermental/thmi/hmi:2026.1.2-1799
     container_name: hmi
     ports:
       - '9903:8080' # HTTP API
     volumes:
       - ./.logs/hmi:/var/log/app
       - ./.logs/hmi/tomcat:/usr/local/tomcat/logs
-      - ./../hmi:/etc/app
+      - ./conf/hmi:/etc/app
     networks:
       - dev
     depends_on:
       - engine
 
   portal:
-    image: portal
+    image: ghcr.io/cybermental/thmi/portal:2026.1.2-1799
     container_name: portal
     ports:
       - '9906:8080' # HTTP API
@@ -55,7 +55,7 @@ services:
     volumes:
       - ./.logs/portal:/var/log/app
       - ./.logs/portal/tomcat:/usr/local/tomcat/logs
-      - ./../portal:/etc/app
+      - ./conf/portal:/etc/app
     networks:
       - dev
     depends_on:

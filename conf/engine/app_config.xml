@@ -34,16 +34,6 @@
 			retentionPeriodDays="1"
 	/>
 
-	<Box
-			uploadUrl="https://upload.box.com"
-			apiUrl="https://api.box.com"
-			clientId=""
-			secretKey=""
-			subjectType=""
-			subjectId=""
-			rootFolder=""
-	/>
-
 	<Encryption
 			enabled="true"
 			key="2baffe2ce39db5640fe93e29b3801656"

@@ -9,8 +9,8 @@ services:
       - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT}
     volumes:
       - ./.logs:/var/log/app
-      - ./edge/app_config.xml:/etc/app/app_config.xml
-      - ./edge/logging.properties:/etc/app/logging.properties
+      - ./conf/edge/app_config.xml:/etc/app/app_config.xml
+      - ./conf/edge/logging.properties:/etc/app/logging.properties
     networks:
       - dev
 

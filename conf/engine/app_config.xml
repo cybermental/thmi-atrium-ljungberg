@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Engine>
+
+	<DataSource
+			jdbcUrl="jdbc:mariadb://mariadb:3306/engine_dev?createDatabaseIfNotExist=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;characterEncoding=utf8&amp;useSSL=false"
+			username="root"
+			password="scada"
+	/>
+
+	<Mqtt
+			url="tcp://mqtt:1883"
+			userName="admin"
+			password="admin"
+			mqttV5="true"
+	/>
+
+	<MqttManagement
+			url="http://mqtt:15672"
+			userName="admin"
+			password="admin"
+	/>
+
+	<Sync
+			enabled="true"
+			period="1"
+			timeout="5"
+			timeUnit="MINUTES"
+			firstSync="FROM_EPOCH"
+	/>
+
+	<ProjectCleanup
+			enabled="true"
+			cron="0 0 1 * * ?"
+			retentionPeriodDays="1"
+	/>
+
+	<Box
+			uploadUrl="https://upload.box.com"
+			apiUrl="https://api.box.com"
+			clientId=""
+			secretKey=""
+			subjectType=""
+			subjectId=""
+			rootFolder=""
+	/>
+
+	<Encryption
+			enabled="true"
+			key="2baffe2ce39db5640fe93e29b3801656"
+			iv="29e8bab4c71d4994ab0308ec9590d14e"
+	/>
+
+</Engine>

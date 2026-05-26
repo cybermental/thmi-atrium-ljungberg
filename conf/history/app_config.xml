@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<History>
+
+	<DataSource
+			jdbcUrl="ch:http://clickhouse:8123"
+			username="default"
+			password=""
+	/>
+
+	<Cleanup
+			enabled="false"
+			cron="0 * * ? * *"
+	/>
+
+	<Mqtt
+			url="tcp://mqtt:1883"
+			userName="admin"
+			password="admin"
+			mqttV5="true"
+	/>
+
+	<Engine
+			clientId="50Ubipt4NRv2Jisa7M1zkJOAieie"
+			secretKey="6MHKrjRfvii1OFiprn8W8jjUVeWIefHDipvf8xh6iiXXLegie"
+			url="http://engine:8080"
+	/>
+
+	<Sync
+			enabled="true"
+			period="1"
+			timeout="5"
+			timeUnit="MINUTES"
+			firstSync="FROM_EPOCH"
+	/>
+
+	<AgentState
+			period="30"
+			timeout="10"
+			timeUnit="SECONDS"
+	/>
+
+	<HistoryMigration
+			tagMigrationBulkPeriodInDays="30"
+		/>
+
+</History>

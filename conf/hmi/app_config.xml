@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Runtime>
+
+	<Encryption
+			enabled="true"
+			key="2baffe2ce39db5640fe93e29b3801656"
+			iv="29e8bab4c71d4994ab0308ec9590d14e"
+	/>
+
+	<Mqtt
+			url="tcp://mqtt:1883"
+			userName="admin"
+			password="admin"
+			mqttV5="true"
+	/>
+
+	<Engine
+			clientId="1jPVpfbzTX6gipvBRQip4kLwieie"
+			secretKey="duj5ACq3yqyE0w5IipQgKq0nqAOdwzMunOaQVxDRPtuYie"
+			url="http://engine:8080"
+	/>
+
+	<History
+			clientId="1jPVpfbzTX6gipvBRQip4kLwieie"
+			secretKey="duj5ACq3yqyE0w5IipQgKq0nqAOdwzMunOaQVxDRPtuYie"
+			url="http://history:8080"
+	/>
+
+	<Simulation
+			clientId="1jPVpfbzTX6gipvBRQip4kLwieie"
+			secretKey="duj5ACq3yqyE0w5IipQgKq0nqAOdwzMunOaQVxDRPtuYie"
+			url="http://simulation:8080"
+	/>
+
+	<HtmlReportBuilder
+			url="http://hmi-ui:81"
+	/>
+
+	<AppHost
+			baseUrl="http://localhost:81"
+	/>
+
+	<Portal
+			url="http://localhost"
+	/>
+
+	<AgentState
+			period="30"
+			timeout="10"
+			timeUnit="SECONDS"
+	/>
+
+	<Mailersend
+			token="API_TOKEN"
+			mailFrom="thirdparty@thmi.cloud"
+			nameFrom="THMI"
+			sendInterval="60"
+			maxEmailCount="100"
+	/>
+
+</Runtime>

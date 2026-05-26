@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<yandex>
+	<logger>
+		<!-- Possible levels: https://github.com/pocoproject/poco/blob/master/Foundation/include/Poco/Logger.h#L108 -->
+		<level>notice</level>
+		<log>/var/log/clickhouse-server/clickhouse-server.log</log>
+		<errorlog>/var/log/clickhouse-server/clickhouse-server.err.log</errorlog>
+		<size>100M</size>
+		<count>10</count>
+		<console>1</console>  <!-- Default behavior is autodetection (log to console if not daemon mode and is tty) -->
+	</logger>
+	<listen_host>0.0.0.0</listen_host>
+</yandex>

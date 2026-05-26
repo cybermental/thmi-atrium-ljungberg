@@ -1,0 +1,66 @@
+services:
+  engine:
+    image: engine
+    container_name: engine
+    ports:
+      - '9901:8080' # HTTP API
+    environment:
+      - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT}
+    volumes:
+      - ./.logs/engine:/var/log/app
+      - ./.logs/engine/tomcat:/usr/local/tomcat/logs
+      - ./../engine:/etc/app
+    networks:
+      - dev
+
+  history:
+    image: history
+    container_name: history
+    ports:
+      - '9902:8080' # HTTP API
+    environment:
+      - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT}
+    volumes:
+      - ./.logs/history:/var/log/app
+      - ./.logs/history/tomcat:/usr/local/tomcat/logs
+      - ./../history:/etc/app
+    networks:
+      - dev
+    depends_on:
+      - engine
+
+  hmi:
+    environment:
+      - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT} -Djavax.xml.accessExternalDTD=all
+    image: hmi
+    container_name: hmi
+    ports:
+      - '9903:8080' # HTTP API
+    volumes:
+      - ./.logs/hmi:/var/log/app
+      - ./.logs/hmi/tomcat:/usr/local/tomcat/logs
+      - ./../hmi:/etc/app
+    networks:
+      - dev
+    depends_on:
+      - engine
+
+  portal:
+    image: portal
+    container_name: portal
+    ports:
+      - '9906:8080' # HTTP API
+    environment:
+      - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT}
+    volumes:
+      - ./.logs/portal:/var/log/app
+      - ./.logs/portal/tomcat:/usr/local/tomcat/logs
+      - ./../portal:/etc/app
+    networks:
+      - dev
+    depends_on:
+      - engine
+
+networks:
+  dev:
+    name: dev

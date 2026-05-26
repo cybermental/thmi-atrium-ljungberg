@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+
+	<Mqtt
+			url="tcp://mqtt:1883"
+			userName="admin"
+			password="admin"
+			mqttV5="true"
+	/>
+
+	<MqttManagement
+			url="http://mqtt:15672"
+			userName="admin"
+			password="admin"
+	/>
+
+	<Engine
+			clientId="vbYNHT7LTtyDglZVv8f8Rwieie"
+			secretKey="XaQuVmWDM1U3YJrZwrdoh19TI19229OXBQJjCishXwEkie"
+			url="http://engine:8080"
+	/>
+
+	<History
+			clientId="vbYNHT7LTtyDglZVv8f8Rwieie"
+			secretKey="XaQuVmWDM1U3YJrZwrdoh19TI19229OXBQJjCishXwEkie"
+			url="http://history:8080"
+	/>
+
+	<Simulation
+			clientId="vbYNHT7LTtyDglZVv8f8Rwieie"
+			secretKey="XaQuVmWDM1U3YJrZwrdoh19TI19229OXBQJjCishXwEkie"
+			url="http://simulation:8080"
+	/>
+
+	<Thirdparty
+			clientId="vbYNHT7LTtyDglZVv8f8Rwieie"
+			secretKey="XaQuVmWDM1U3YJrZwrdoh19TI19229OXBQJjCishXwEkie"
+			url="http://thirdparty:8080"
+	/>
+
+	<Runtime
+			url="http://localhost:81"
+	/>
+
+	<AuditLog
+			defaultDateIntervalDays="1"
+	/>
+
+	<AgentState
+			period="30"
+			timeout="10"
+			timeUnit="SECONDS"
+	/>
+
+	<PublicApi
+			serverUrl="http://localhost:9906"
+			serverDescription="Docker environment"
+			tokenCount="20"
+			refillIntervalInMinutes="1"
+	/>
+
+	<AppHost
+			baseUrl="http://localhost:9906"
+			wsProxyUrl="ws://localhost:9906"
+	/>
+
+	<HtmlReportBuilder
+			url="http://portal-ui"
+	/>
+
+	<Telemetry>
+		<Cpu enabled="true" period="1" timeUnit="MINUTES" />
+		<Disk enabled="true" period="1" timeUnit="MINUTES" />
+		<Memory enabled="true" period="1" timeUnit="MINUTES" />
+		<Network enabled="true" period="5" timeUnit="MINUTES" checkIpUrl="http://engine:8080/api/telemetry/network/ip" />
+	</Telemetry>
+
+<!--	<Myrspoven-->
+<!--			identityServerHost="https://i4test.azurewebsites.net"-->
+<!--			apiServerHost="https://aiapi-test-myrspoven.azurewebsites.net"-->
+<!--			clientId="controlmachines"-->
+<!--			clientSecret="eXpt0huOordAiF08HylE"-->
+<!--	/>-->
+
+<!--	<Emv-->
+<!--			url="https://emv-beta.numerously.com/api/comapi"-->
+<!--			username="superuser"-->
+<!--			password="${EMV_PASSWORD}"-->
+<!--	/>-->
+
+<!--	<Weatherstack-->
+<!--			url="http://api.weatherstack.com"-->
+<!--			accessKey="{ACCESS_KEY}"-->
+<!--	/>-->
+
+<!--	<Eon-->
+<!--			url="https://navigator-api.eon.se"-->
+<!--	/>-->
+
+<!--	<Nordpool-->
+<!--			identityServerHost="https://sts.nordpoolgroup.com/connect/token"-->
+<!--			apiServerHost="https://data-api.nordpoolgroup.com"-->
+<!--			authorization="{AUTHORIZATION}"-->
+<!--	/>-->
+
+<!--	<Mestro-->
+<!--			url="https://api.mestro.se"-->
+<!--	/>-->
+
+<!--	<Radonova-->
+<!--			url="https://online.radonova.se/dev-external/api/spirit/v1"-->
+<!--	/>-->
+
+<!--	<Metry-->
+<!--			url="https://app.metry.io"-->
+<!--	/>-->
+
+<!--	<Sentry-->
+<!--			enabled="false"-->
+<!--			debug="false"-->
+<!--			dsn="https://7193f7b237d1c00b24b8fe799d70894d@sentry.thmi.cloud/3"-->
+<!--			tracesSampleRate="1.0"-->
+<!--	/>-->
+
+	<Mailersend
+			token="API_TOKEN"
+			mailFrom="thirdparty@thmi.cloud"
+			nameFrom="Energy Machines"
+			sendInterval="60"
+			maxEmailCount="100"
+	/>
+
+<!--	<ObjectDetection-->
+<!--			url="https://192.168.10.18:7208"-->
+<!--			apiKey="{API_KEY}"-->
+<!--	/>-->
+
+</Config>

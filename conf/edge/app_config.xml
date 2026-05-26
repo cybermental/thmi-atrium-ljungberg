@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Server>
+	<Projects>
+		<Project name="com_server" />
+	</Projects>
+
+	<Encryption
+			enabled="true"
+			key="2baffe2ce39db5640fe93e29b3801656"
+			iv="29e8bab4c71d4994ab0308ec9590d14e"
+	/>
+
+	<DataSource
+			jdbcUrl="jdbc:mariadb://mariadb:3306?createDatabaseIfNotExist=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;characterEncoding=utf8&amp;useSSL=false"
+			username="root"
+			password="scada"
+	/>
+	<HistoryDataSource
+			jdbcUrl="ch:http://clickhouse:8123"
+			username=""
+			password=""
+	/>
+	<HistoryCleanup
+			enabled="true"
+			initDelay="10"
+			timeout="360"
+			timeUnit="MINUTES"
+	/>
+
+	<Clouds primary="Private">
+		<Cloud name="Private">
+			<Projects>
+				<Project name="com_server" projectId="00000000000000000000000000000000" />
+			</Projects>
+			<Mqtt
+					url="tcp://mqtt:1883"
+					userName="admin"
+					password="admin"
+			/>
+			<Engine
+					clientId="2ftJLnis7QOqczIczKsBboAieie"
+					secretKey="QIfOPPis3o6e2nUVii4rFp97hron03fbPTurCyRThav5cie"
+					url="http://engine:8080"
+			/>
+		</Cloud>
+	</Clouds>
+
+	<Ads netId="9.9.0.0.1.19" port="48898"/>
+</Server>

@@ -1,8 +1,131 @@
 # thmi-atrium-ljungberg
 
-Installation
+# THMI On-Prem Deployment Guide
 
-1. Go to folder `.docker`
-2. Run MariaDB, Clickhouse and RabbitMQ containers: `docker-compose -f env.yml up -d`
-3. Populate database `docker run --network=dev -it --rm engine-utils`
-4. 
+This document describes how to provision an Ubuntu server for this repository and prepare it to run the THMI stack with Docker.
+
+## Target Host
+
+### 
+###'
+Hardware requirements 
+- CPU
+- RAM
+- HDD
+
+### Software
+- Ubuntu Server 24.04 LTS or 26.04 (LTS)
+- A user with `sudo` access
+- Internet access for `apt`, Docker packages, and container image pulls
+- Access to the THMI configuration files mounted under `/home/thmi/share`
+- Enough RAM and disk for the THMI Java services, logs, and Docker images
+- Docker Engine
+- Docker Compose plugin
+
+## 1. Base Ubuntu Provisioning
+
+Update the host and install baseline packages:
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y ca-certificates	curl	gnupg	lsb-release	git	jq unzip net-tools
+```
+
+
+## 2. Create the Deployment User and Directories
+
+Create the service account used by the deployment volumes:
+
+```bash
+sudo useradd -m -s /bin/bash thmi
+sudo usermod -aG sudo thmi
+```
+
+## 3. Install Docker Engine and Compose Plugin
+
+Install Docker from Docker's official Ubuntu repository:
+
+```bash
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+Check that docker is running 
+
+```bash
+sudo systemctl status docker
+```
+
+If docker is not running start the service 
+
+```bash
+sudo systemctl start docker
+```
+
+Enable Docker and allow the thmi user to run it:
+
+```bash
+sudo systemctl enable --now docker
+sudo usermod -aG docker thmi
+newgrp docker
+```
+
+
+
+## 6. Clone This Repository
+
+```bash
+sudo -iu thmi
+git clone <repo-url>
+cd <repo-url>
+```
+
+## 7. Deploy the Stacks
+
+
+# THMI Application Stack
+
+make sure that the edge can communicate with the cloud component 
+
+## THMI Cloud
+
+Run MariaDB, Clickhouse and RabbitMQ containers:
+
+```bash
+docker-compose -f env.yml up -d
+```
+
+MariaDB and clickhouse should have persistent volumes to prevent data loss on stack restart.
+Compose file do not have any redundancy or backup mechanism
+
+Populate database
+
+```bash
+docker run --network=dev -it --rm engine-utils
+```
+
+Start the THMI stack 
+```bash
+docker compose -f cloud.yml up -d
+```
+## THMI Edge
+
+```bash
+git clone <repo-url>
+cd <repo-url>
+docker compose -f edge.yml up -d
+``` 

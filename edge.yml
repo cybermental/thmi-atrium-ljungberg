@@ -1,12 +1,14 @@
 services:
 
   edge:
-    image: edge
+    image: ghcr.io/cybermental/thmi/thmi-edge:2026.1.2-821
     container_name: edge
     ports:
-      - '9907:8080' # HTTP API
+      - '9907:8080'
+      - '9908:80'
     environment:
       - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT}
+      - BIND_INTERFACE_MODE=public
     volumes:
       - ./.logs:/var/log/app
       - ./conf/edge/app_config.xml:/etc/app/app_config.xml

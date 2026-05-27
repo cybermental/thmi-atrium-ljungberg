@@ -32,7 +32,7 @@ services:
     container_name: hmi
     volumes:
       - ./.logs/hmi:/var/log/app
-      - ./.qlogs/hmi/tomcat:/usr/local/tomcat/logs
+      - ./.logs/hmi/tomcat:/usr/local/tomcat/logs
       - ./conf/hmi:/etc/app
     networks:
       - thmi-com
@@ -51,6 +51,34 @@ services:
     networks:
       - thmi-com
     depends_on:
+      - engine
+
+ 
+  nginx:
+    image: ghcr.io/cybermental/thmi/nginx-fe:2026.1.2-1799 #$COM_DOCKER_REGISTRY/nginx-fe:$FE_TAG
+    container_name: nginx
+    networks:
+      - thmi-com
+    restart: always
+    environment:
+      EXTERNAL_ADDRESS: 
+      GOOGLE_MAPS_API_KEY: ""
+      MAPTILER_API_KEY: ""
+
+    command: |
+      /bin/bash -c " 
+      envsubst '$${GOOGLE_MAPS_API_KEY} $${MAPTILER_API_KEY}' < /etc/nginx/conf.d/common.thirdparty.locations.template > /etc/nginx/conf.d/common.thirdparty.locations.conf 
+      envsubst '$${EXTERNAL_ADDRESS}' < /var/www/thmi/portal/config.js.template >/var/www/thmi/portal/config.js && \
+      envsubst '$${EXTERNAL_ADDRESS}' < /var/www/thmi/hmi/config.json.template > /var/www/thmi/hmi/config.json && \
+      envsubst '$${EXTERNAL_ADDRESS}' < /etc/nginx/conf.d/hmi.locations.conf.template > /etc/nginx/conf.d/hmi.locations.conf && \
+      nginx -g 'daemon off;'"
+
+    ports:
+      - 80:80 # web uui
+      - 5672:5672 # MQTT
+    depends_on:
+      - portal
+      - hmi
       - engine
 
 networks:

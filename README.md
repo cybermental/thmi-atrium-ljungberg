@@ -1,20 +1,16 @@
-# thmi-atrium-ljungberg
-
 # THMI On-Prem Deployment Guide
 
 This document describes how to provision an Ubuntu server for this repository and prepare it to run the THMI stack with Docker.
 
-## Target Host
+# Provisioning and host requerements
 
-### 
-###'
-Hardware requirements 
+### Hardware requirements 
 - CPU
 - RAM
 - HDD
 
 ### Software
-- Ubuntu Server 24.04 LTS or 26.04 (LTS)
+- Ubuntu Server 24.04 LTS or 26.04 (LTS) or Debian
 - A user with `sudo` access
 - Internet access for `apt`, Docker packages, and container image pulls
 - Access to the THMI configuration files mounted under `/home/thmi/share`
@@ -22,7 +18,7 @@ Hardware requirements
 - Docker Engine
 - Docker Compose plugin
 
-## 1. Base Ubuntu Provisioning
+## Base Ubuntu Provisioning
 
 Update the host and install baseline packages:
 
@@ -32,25 +28,23 @@ sudo apt upgrade -y
 sudo apt install -y ca-certificates	curl gnupg lsb-release git	jq unzip net-tools
 ```
 
+### Create the Deployment User and Directories
 
-## 2. Create the Deployment User and Directories
-
-Create the service account or use already existing on used by the deployment volumes:
-later in this example 'ubuntu' is used
+Create the service account or use already existing. Later in this example 'ubuntu' is used
 
 ```bash
 sudo useradd -m -s /bin/bash ubuntu
 sudo usermod -aG sudo ubuntu
 ```
 
-## 2. Clone This Repository
+### Clone This Repository
 
 ```bash
 git clone https://github.com/cybermental/thmi-atrium-ljungberg thmi-cloud
 cd thmi-cloud
 ```
 
-## 3. Install Docker Engine and Compose Plugin
+### Install Docker Engine and Compose Plugin
 
 Install Docker from Docker's official Ubuntu repository:
 
@@ -59,7 +53,27 @@ chmod a+x ./provisioning/install_docker.sh
 ./provisioning/install_docker.sh
 ```
 
-the script will install docker. it executes following steps
+Check that docker is running 
+
+```bash
+sudo systemctl status docker
+```
+
+If docker is not running start the service 
+
+```bash
+sudo systemctl start docker
+```
+
+Enable Docker and allow the ubuntu user to run it:
+
+```bash
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+#### Down bellow is the breakdown of steps executed by the script
 
 ```bash
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -79,33 +93,10 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-Check that docker is running 
 
-```bash
-sudo systemctl status docker
-```
-
-If docker is not running start the service 
-
-```bash
-sudo systemctl start docker
-```
-
-Enable Docker and allow the thmi user to run it:
-
-```bash
-sudo systemctl enable --now docker
-sudo usermod -aG docker $USER
-newgrp docker
-```
+# Deploying THMI cloud stack
 
 
-## 7. Deploy the Stacks
-
-
-# THMI Application Stack
-
-make sure that the edge can communicate with the cloud component 
 
 ## THMI Cloud
 
@@ -147,3 +138,17 @@ git clone <repo-url>
 cd <repo-url>
 docker compose -f edge.yml up -d
 ``` 
+
+## Networking 
+
+make sure that the edge can communicate with the cloud component 
+
+list of ports
+
+| Service | Port |
+|---------|---------|
+| THMI web UI |    80     |
+| RabbitMQ UI |    80     |
+|   Engine    |    8080     | 
+|      |         | 
+

@@ -144,6 +144,9 @@ We are not provivng you with the SSL sertificates or any type of encryption.
 So the connection security is up to you.
 If you want to expose the THMI cloud or the edge componet to the internet you shhould take care of encrypting the traffic 
 
+### monitoring
+
+We are not providing any means of montoring the stack for the evaluation time. you can use any tool that are compatible with docker to do so. 
 
 ## Access 
 

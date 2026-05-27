@@ -152,3 +152,21 @@ list of ports
 |   Engine    |    8080     | 
 |      |         | 
 
+you can check that 
+
+### SSL security
+
+We are not provivng you with the SSL sertificates or any type of encryption.
+So the connection security is up to you.
+If you want to expose the THMI cloud or the edge componet to the internet you shhould take care of encrypting the traffic 
+
+
+## Access 
+
+Add external collaborator to the github
+
+generate fine access token
+
+https://docs.github.com/en/repositories/creating-and-managing-repositories/access-to-repositories
+
+

@@ -91,6 +91,16 @@ export CR_PAT=ghp_XXXYYYYZZZ
 echo "$CR_PAT" | docker login ghcr.io/cybermental -u username --password-stdin
 ```
 
+Add google api, maptiler keys and host IP address or the domain name for the fronend
+
+```yaml
+  EXTERNAL_ADDRESS: 192.168.1.10
+  GOOGLE_MAPS_API_KEY: "XXXYYYZZZ"
+  MAPTILER_API_KEY: "XXXYYYZZZ"
+```
+
+`EXTERNAL_ADDRESS` is the ip where you will access the thmi cloud. also used as endpoing for the edge and mqtt connection. Can be a domain
+
 Run MariaDB, Clickhouse and RabbitMQ containers:
 
 ```bash
@@ -132,7 +142,7 @@ list of ports
 | Service | Port |
 |---------|---------|
 | THMI web UI |    80     |
-| RabbitMQ UI |    80     |
+| MQTT |    5672     |
 |   Engine    |    8080     | 
 |      |         | 
 

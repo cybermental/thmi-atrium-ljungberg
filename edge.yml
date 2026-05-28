@@ -22,9 +22,6 @@ services:
     container_name: edge
     ports:
       - '18080:8080'
-    environment:
-      - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT}
-      - BIND_INTERFACE_MODE=public
     volumes:
       - ./.logs:/var/log/app
       - ./conf/edge/app_config.xml:/etc/app/app_config.xml

@@ -32,18 +32,6 @@
 			url="http://simulation:8080"
 	/>
 
-	<HtmlReportBuilder
-			url="http://hmi-ui:81"
-	/>
-
-	<AppHost
-			baseUrl="http://localhost:81"
-	/>
-
-	<Portal
-			url="http://localhost"
-	/>
-
 	<AgentState
 			period="30"
 			timeout="10"

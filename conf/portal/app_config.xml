@@ -38,10 +38,6 @@
 			url="http://thirdparty:8080"
 	/>
 
-	<Runtime
-			url="http://localhost:81"
-	/>
-
 	<AuditLog
 			defaultDateIntervalDays="1"
 	/>
@@ -53,15 +49,15 @@
 	/>
 
 	<PublicApi
-			serverUrl="http://localhost:9906"
+			serverUrl="http://localhost:8080"
 			serverDescription="Docker environment"
 			tokenCount="20"
 			refillIntervalInMinutes="1"
 	/>
 
 	<AppHost
-			baseUrl="http://localhost:9906"
-			wsProxyUrl="ws://localhost:9906"
+			baseUrl="http://localhost:8080"
+			wsProxyUrl="ws://localhost:8080"
 	/>
 
 	<HtmlReportBuilder
@@ -124,7 +120,7 @@
 	/>
 
 	<ObjectDetection
-			url="https://192.168.10.18:7208"
+			url="{API_HOST}"
 			apiKey="{API_KEY}"
 	/>
 

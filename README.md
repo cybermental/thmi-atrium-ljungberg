@@ -128,7 +128,7 @@ docker compose -f cloud.yml up -d
 ```
 ## THMI Edge
 
-THMI Edge is running as a Docker container. The image includes MariaDB.
+THMI Edge is running as a Docker container. The compose file `edge.yml` includes MariaDB.
 
 Edge should be able to connect to the same RabbitMQ as a Cloud stack.
 The config file for Edge can be found there: ./conf/edge/app_config.xml

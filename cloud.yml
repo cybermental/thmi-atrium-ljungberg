@@ -54,7 +54,7 @@ services:
       - engine
 
   nginx:
-    image: ghcr.io/cybermental/emc/nginx-fe:eval #$COM_DOCKER_REGISTRY/nginx-fe:$FE_TAG
+    image: ghcr.io/cybermental/emc/nginx-fe:eval
     container_name: nginx
     networks:
       - thmi-com
@@ -73,8 +73,9 @@ services:
       nginx -g 'daemon off;'"
 
     ports:
-      - 80:80 # web uui
-      - 5672:5672 # MQTT
+      - 80:80 # web ui
+      - 88:88 # engine
+      - 1883:1883 # MQTT
     depends_on:
       - portal
       - hmi

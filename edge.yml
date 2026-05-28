@@ -4,8 +4,6 @@ services:
     image: mariadb:10.6.7
     container_name: mariadb_edge
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max_allowed_packet=256M --init-file /data/application/init.sql
-    ports:
-      - '3307:3306'
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=scada
@@ -17,13 +15,13 @@ services:
       - ./conf/mariadb/encryption:/etc/mysql/encryption:ro
       - ./conf/mariadb/init/init.sql:/data/application/init.sql:ro
     networks:
-      - dev
+      - edge-net
 
   edge:
     image: ghcr.io/cybermental/thmi/thmi-edge:2026.1.2-825
     container_name: edge
     ports:
-      - '9907:8080'
+      - '18080:8080'
     environment:
       - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT}
       - BIND_INTERFACE_MODE=public
@@ -32,7 +30,7 @@ services:
       - ./conf/edge/app_config.xml:/etc/app/app_config.xml
       - ./conf/edge/logging.properties:/etc/app/logging.properties
     networks:
-      - dev
+      - edge-net
     depends_on:
       - mariadb_edge
 
@@ -41,5 +39,5 @@ volumes:
     name: mariadb_edge-volume
 
 networks:
-  dev:
-    name: dev
+  edge-net:
+    name: edge-net

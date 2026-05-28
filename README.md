@@ -113,7 +113,7 @@ Compose file do not have any redundancy or backup mechanism
 Populate database
 
 ```bash
-docker run --network=dev -it --rm ghcr.io/cybermental/thmi/engine-utils
+docker run --network=dev -it --rm ghcr.io/cybermental/emc/engine-utils:eval
 ```
 
 Start the THMI stack 

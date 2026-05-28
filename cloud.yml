@@ -1,6 +1,6 @@
 services:
   engine:
-    image: ghcr.io/cybermental/thmi/engine:2026.1.2-1799
+    image: ghcr.io/cybermental/emc/engine:eval
     container_name: engine
     environment:
       - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT}
@@ -12,7 +12,7 @@ services:
       - thmi-com
 
   history:
-    image: ghcr.io/cybermental/thmi/history:2026.1.2-1799
+    image: ghcr.io/cybermental/emc/history:eval
     container_name: history
     environment:
       - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT}
@@ -28,7 +28,7 @@ services:
   hmi:
     environment:
       - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT} -Djavax.xml.accessExternalDTD=all
-    image: ghcr.io/cybermental/thmi/hmi:2026.1.2-1799
+    image: ghcr.io/cybermental/emc/hmi:eval
     container_name: hmi
     volumes:
       - ./.logs/hmi:/var/log/app
@@ -40,7 +40,7 @@ services:
       - engine
 
   portal:
-    image: ghcr.io/cybermental/thmi/portal:2026.1.2-1799
+    image: ghcr.io/cybermental/emc/portal:eval
     container_name: portal
     environment:
       - JAVA_TOOL_OPTIONS=-Dcom.thmi.ENVIRONMENT=${CLOUD_ENVIRONMENT}
@@ -53,15 +53,14 @@ services:
     depends_on:
       - engine
 
- 
   nginx:
-    image: ghcr.io/cybermental/thmi/nginx-fe:2026.1.2-1799 #$COM_DOCKER_REGISTRY/nginx-fe:$FE_TAG
+    image: ghcr.io/cybermental/emc/nginx-fe:eval #$COM_DOCKER_REGISTRY/nginx-fe:$FE_TAG
     container_name: nginx
     networks:
       - thmi-com
     restart: always
     environment:
-      EXTERNAL_ADDRESS: 
+      EXTERNAL_ADDRESS:
       GOOGLE_MAPS_API_KEY: ""
       MAPTILER_API_KEY: ""
 

@@ -18,7 +18,7 @@ services:
       - edge-net
 
   edge:
-    image: ghcr.io/cybermental/thmi/thmi-edge:2026.1.2-825
+    image: ghcr.io/cybermental/emc/thmi-edge:eval
     container_name: edge
     ports:
       - '18080:8080'
